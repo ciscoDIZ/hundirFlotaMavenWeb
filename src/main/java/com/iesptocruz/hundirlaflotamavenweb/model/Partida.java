@@ -41,6 +41,10 @@ public class Partida {
     private static int estadosPartidaIdx=0;
     private static int idxJugadores = 0;
 
+    public Partida(Modo MODO) {
+        this.MODO = MODO;
+    }
+    
     public Partida(int jugadores, Modo modo) {
         turno = Turno.JUGADOR1;
         this.MODO = modo;

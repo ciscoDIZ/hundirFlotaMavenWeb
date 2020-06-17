@@ -15,7 +15,7 @@ public class Barco {
     private Punto head;
     private int vidas;
     private boolean hundido;
-
+    
     public Barco(int size) {
         SIZE = size;
         vidas = size;

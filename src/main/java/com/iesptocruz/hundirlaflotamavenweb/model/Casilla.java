@@ -15,6 +15,11 @@ public class Casilla {
     private boolean activa;
     private Barco b;
 
+    public Casilla() {
+    }
+
+    
+    
     public Casilla(Punto punto, boolean ocupada) {
         this.punto = punto;
         this.activa = true;

@@ -27,6 +27,8 @@ public class Tablero {
     private Direccion[] direcciones;
     private Direccion direccion;
 
+    
+    
     public Tablero(int barcos, int dim) {
         ini(barcos, dim);
         barcosActualIdx = 0;

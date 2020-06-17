@@ -38,7 +38,7 @@
                             String x = String.valueOf(casilla1.getPunto().getPosX());
                             String y = String.valueOf(casilla1.getPunto().getPosY());
                            
-                            out.print("<a href='gestorPartida?x="+x+"&y="+y+"'><div class='grid-item'></div></a>");
+                            out.print("<a href=\"gestorPartida?x="+x+"&y="+y+"\"><div class='grid-item'></div></a>");
                         }
                     }
 

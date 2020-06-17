@@ -21,6 +21,11 @@ public class Jugador {
     private boolean prioridadTurno;
     private Tablero tablero;
     private Integer puntuacion;
+
+    public Jugador() {
+    }
+    
+    
     public Jugador(String nombre, Tipo tipo) {
         this.nombre = nombre;
         this.tipo = tipo;
