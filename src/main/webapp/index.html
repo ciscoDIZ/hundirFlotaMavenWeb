@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <form method="post" action="procesar">
+                <fieldset>
+                    <legend>Modo</legend>
+                    <label for="pve">JcE</label>
+                    <input id="pve" type="radio" name="modo" value="pve" checked>
+                    <br>
+                    <label for="pvp">JcJ</label>
+                    <input id="pvp" type="radio" name="modo" value="pvp">
+                    <br>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Jugador</legend>
+                    <label for="crear">Crear partida</label>
+                    <input id="crear" type="radio" name="accion" value="crear" checked>
+                    <br>
+                    <label for="unir">Unirser a partida</label>
+                    <input id="unir" type="radio" name="accion" value="unir">
+                    <br>
+                    <label for="nombre">Nombre:</label>
+                    <input id="nombre" name="nombre" type="text">
+                </fieldset>
+                <input type="submit" value="enviar">
+
+                    
+
+                <!--<label for="nick">Introducir nick:</label><input id="nick" name="nick" type="text"><br>
+                <label for="mesa">Introducir mesa:</label><input id="mesa" name="mesa" type="text"><br>-->
+            </form>
+        </div>
+    </body>
+</html>
