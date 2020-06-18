@@ -63,7 +63,6 @@
                         }
                     }
                     }
-                    out.print(p.getTurno());
                     session.setAttribute("partida", p);
                 %>
             </div>
