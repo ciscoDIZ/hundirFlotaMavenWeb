@@ -12,6 +12,7 @@ import com.iesptocruz.hundirlaflotamavenweb.model.Tablero;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -59,12 +60,28 @@ public class GestorPartida extends HttpServlet {
             String botId = (String) session.getAttribute("botId");
             String x = request.getParameter("x");
             String y = request.getParameter("y");
-            out.print("disparo: x(" + x + ") y(" + y + ")");
+            //out.print("disparo: x(" + x + ") y(" + y + ")");
             Partida p = (Partida) session.getAttribute("partida");
+
             if (p.getMODO().equals(Partida.Modo.PVE)) {
+
                 Jugador humano = p.getJugador(session.getId());
                 Jugador maquina = p.getJugador(botId);
+                Casilla cHumano = humano.getTablero().getCasilla(Integer.parseInt(x), Integer.parseInt(y));
+                Casilla cMaquina = maquina.getTablero().getCasilla(Integer.parseInt(x), Integer.parseInt(y));
+                if (p.getTurno().equals(Partida.Turno.JUGADOR1) && cMaquina.isActiva()) {
+                    humano.disparo(Integer.parseInt(x), Integer.parseInt(y));
+                }
+                isVictoria(p, session, request);
+                if (p.getTurno().equals(Partida.Turno.JUGADOR2) && cHumano.isActiva()) {
+                    maquina.disparo();
+                }
+                isVictoria(p, session, request);
+
             }
+            session.setAttribute("partida", p);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("partida.jsp");
+            dispatcher.forward(request, response);
             /*out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -74,6 +91,13 @@ public class GestorPartida extends HttpServlet {
             out.println("<h1>Servlet GestorPartidas at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");*/
+        }
+    }
+
+    private void isVictoria(Partida p, HttpSession session, HttpServletRequest request) {
+        if (p.getEstado().equals(Partida.Estado.VICTORIA)) {
+            session.setAttribute("partida", p);
+            request.getRequestDispatcher("victoria.jsp");
         }
     }
 

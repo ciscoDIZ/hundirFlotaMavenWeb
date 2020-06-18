@@ -35,13 +35,23 @@ public class Procesar extends HttpServlet {
             throws ServletException, IOException {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            HttpSession session = request.getSession();
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet Procesar</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Procesar at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Estas en el get de Procesar</h1>");
+            Partida p = (Partida)session.getAttribute("partida");
+            if(p.getEstado().equals(Partida.Estado.ACTIVA)){
+                request.getRequestDispatcher("partida.jsp")
+                        .forward(request, response);
+            }else if(p.getEstado().equals(Partida.Estado.VICTORIA)){
+                request.getRequestDispatcher("victoria.jsp")
+                        .forward(request, response);
+            }
+            out.print(p.getEstado());
             out.println("</body>");
             out.println("</html>");
         }
@@ -66,25 +76,29 @@ public class Procesar extends HttpServlet {
             String modo = request.getParameter("modo");
             
             if(modo.equals("pve")){
-                Jugador humano = new Jugador(nombre, Jugador.Tipo.HUMANO);
-                humano.setIdSesion(session.getId());
-                humano.setPrioridadTurno(true);
-                Jugador maquina = new Jugador("Teddy", Jugador.Tipo.MAQUINA);
-                String botId = "bot_"+maquina.getNombre().toLowerCase()+session.getId();
-                maquina.setIdSesion(botId);
                 Partida p = new Partida(2, Partida.Modo.PVE);
+                Jugador humano = new Jugador(nombre, Jugador.Tipo.HUMANO, p
+                        , Partida.Turno.JUGADOR1);
+                humano.setIdSesion(session.getId());
+                
+                Jugador maquina = new Jugador("Teddy", Jugador.Tipo.MAQUINA, p
+                        , Partida.Turno.JUGADOR2);
+                String botId = "bot_"+maquina.getNombre().toLowerCase()+session
+                        .getId();
+                maquina.setIdSesion(botId);
+                
                 p.setId(humano.getNombre()+"_"+session.getId());
                 p.getJugadores().put(humano.getIdSesion(), humano);
                 p.getJugadores().put(maquina.getIdSesion(), maquina);
+                session.setAttribute("nombre", nombre);
                 session.setAttribute("botId", botId);
                 session.setAttribute("partida", p);
                 session.setAttribute("modo", modo);
-                request.getRequestDispatcher("partida.jsp").forward(request, response);
+                request.getRequestDispatcher("partida.jsp").forward(request
+                        , response);
                 
             }
-            Enumeration<String> attributeNames = session.getAttributeNames();
             
-            out.print(session.getId());
             
 
         }

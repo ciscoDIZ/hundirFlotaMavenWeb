@@ -307,7 +307,7 @@ public class Tablero {
     }
 
     public Casilla getCasilla(int x, int y) {
-        return tablero[y][x];
+        return tablero[x][y];
     }
 
     public int getSize() {
@@ -317,4 +317,45 @@ public class Tablero {
     public int getSize(int index) {
         return tablero[index].length;
     }
+
+    public Barco[] getBarcos() {
+        return barcos;
+    }
+
+    public void setBarcos(Barco[] barcos) {
+        this.barcos = barcos;
+    }
+
+    public Casilla[][] getTablero() {
+        return tablero;
+    }
+
+    public void setTablero(Casilla[][] tablero) {
+        this.tablero = tablero;
+    }
+
+    public int getBarcosActualIdx() {
+        return barcosActualIdx;
+    }
+
+    public void setBarcosActualIdx(int barcosActualIdx) {
+        this.barcosActualIdx = barcosActualIdx;
+    }
+
+    public Direccion[] getDirecciones() {
+        return direcciones;
+    }
+
+    public void setDirecciones(Direccion[] direcciones) {
+        this.direcciones = direcciones;
+    }
+
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
+    }
+    
 }
